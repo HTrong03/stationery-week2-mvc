@@ -1,0 +1,50 @@
+@model StationeryWeek2.Mvc.ViewModels.StationeryDetailViewModel
+
+<h2 class="mb-4">Chi tiết văn phòng phẩm</h2>
+
+<table class="table table-bordered ">
+    <tr>
+        <th class="text-center">Mã</th>
+        <td class="text-center">@Model.Code</td>
+    </tr>
+
+    <tr>
+        <th class="text-center">Tên</th>
+        <td class="text-center">@Model.Name</td>
+    </tr>
+
+    <tr>
+        <th class="text-center">Loại</th>
+        <td class="text-center">@Model.Category</td>
+    </tr>
+
+    <tr>
+        <th class="text-center">Thương hiệu</th>
+        <td class="text-center">@Model.Brand</td>
+    </tr>
+
+    <tr>
+        <th class="text-center">Giá</th>
+        <td class="text-center">@Model.PriceText</td>
+    </tr>
+
+    <tr>
+        <th class="text-center">Số lượng</th>
+        <td class="text-center">@Model.Quantity</td>
+    </tr>
+
+    <tr>
+        <th class="text-center">Trạng thái</th>
+        <td class="text-center">@Model.StockStatus</td>
+    </tr>
+
+    <tr>
+        <th class="text-center">Cập nhật</th>
+        <td class="text-center">@Model.LastUpdatedText</td>
+    </tr>
+</table>
+
+<a class="btn btn-dark"
+   href="/Stationeries">
+    Quay lại
+</a>

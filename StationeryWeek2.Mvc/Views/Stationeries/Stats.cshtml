@@ -1,0 +1,220 @@
+@model StationeryWeek2.Mvc.ViewModels.StationeryStatsViewModel
+
+<h2 class="mb-2 fw-bold">📊 Inventory Stats</h2>
+<p>Trang này giúp bạn xem nhanh tổng quan tình hình tồn kho của cửa hàng.</p>
+<div class="row row-cols-5 g-3">
+    
+    <div class="col">
+        <div class="card p-3 mb-3" style="background-color:#e7f1ff">
+            <h6 class="text-center" style="color:#156eea">Tổng số loại sản phẩm</h6>
+            <h2 class="text-center" style="color:#156eea">@Model.TotalItems</h2>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card p-3 mb-3" style="background-color:#ebf5ed; color: rgb(17, 125, 17)">
+            <h6 class="text-center" style="color: rgb(17, 125, 17)">Tổng số lượng tồn kho</h6>
+            <h2 class="text-center">@Model.TotalQuantity</h2>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card p-3 mb-3" style="background-color:#feedff; color: rgb(134, 32, 150)">
+            <h6 class="text-center" >Tổng giá trị tồn kho</h6>
+            <h2 class="text-center">@Model.TotalValueText</h2>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card p-3 mb-3" style="background-color:#fbecec">
+            <h6 class="text-center text-danger" >Sản phẩm đã hết hàng</h6>
+            <h2 class="text-center text-danger">
+                @Model.OutOfStock
+            </h2>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card p-3 mb-3"
+            style="background-color:#fff8e1">
+
+            <h6 class="text-center"
+                style="color:#e6a700">
+                Sản phẩm cần nhập thêm
+            </h6>
+
+            <h2 class="text-center"
+                style="color:#e6a700">
+                @Model.LowStockCount
+            </h2>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- PHẦN CHI TIẾT TRẠNG THÁI -->
+
+<div class="card border-primary-subtle mb-4 shadow-sm" style="background-color: #eaf3ff">
+
+    <div class="card-header fw-bold text-primary" >
+        ℹ️ Đánh giá tình hình tồn kho
+    </div>
+
+    <div class="card-body">
+
+        <div class="d-flex align-items-start">
+
+            <div class="me-4">
+                <div class="rounded-circle bg-warning-subtle d-flex 
+                            justify-content-center align-items-center"
+                     style="width:70px;height:70px;font-size:34px;">
+                    ⚠️
+                </div>
+            </div>
+
+            <div>
+
+                @if (Model.OutOfStock > 0)
+                {
+                    <h5 class="fw-bold text-warning">
+                        Có sản phẩm đã hết hàng.
+                        Cần nhập thêm ngay.
+                    </h5>
+
+                    <p class="text-secondary mb-0">
+                        Hiện tại có
+                        <strong>@Model.OutOfStock</strong>
+                        sản phẩm đã hết hàng và
+                        <strong>@Model.LowStockCount</strong>
+                        sản phẩm đang ở mức tồn kho thấp hoặc bằng mức tối thiểu.
+                        <br>Hãy kiểm tra danh sách sản phẩm để xem chi tiết
+                    </p>
+                }
+                else if (Model.LowStockCount > 0)
+                {
+                    <h5 class="fw-bold text-warning">
+                        Một số sản phẩm sắp hết hàng.
+                    </h5>
+
+                    <p class="text-secondary mb-0">
+                        Hiện tại có
+                        <strong>@Model.LowStockCount</strong>
+                        sản phẩm cần nhập thêm.
+
+                        <br />
+
+                        Nên lập kế hoạch bổ sung hàng sớm.
+                    </p>
+                }
+                else
+                {
+                    <h5 class="fw-bold text-success">
+                        Tình trạng kho hiện tại ổn định.
+                    </h5>
+
+                    <p class="text-secondary mb-0">
+                        Tất cả sản phẩm hiện đang còn hàng
+                        và số lượng tồn kho ổn định.
+                    </p>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-6">
+
+        <div class="card shadow-sm mb-3">
+
+            <div class="card-body">
+
+                <h6 class="fw-bold text-primary mb-3">
+                    Chi tiết theo trạng thái
+                </h6>
+
+                <div class="d-flex justify-content-between mb-2">
+                    <span>
+                        <span class="text-success">●</span>
+                        Sản phẩm còn hàng (tồn kho > mức tối thiểu)
+                    </span>
+
+                    <strong class="text-success">
+                        @Model.InStockCount
+                    </strong>
+                </div>
+
+                <div class="d-flex justify-content-between mb-2">
+                    <span>
+                        <span class="text-warning">●</span>
+                        Sản phẩm cần nhập thêm (tồn kho <= mức tối thiểu)
+                    </span>
+
+                    <strong class="text-warning">
+                        @Model.LowStockCount
+                    </strong>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <span>
+                        <span class="text-danger">●</span>
+                        Sản phẩm đã hết hàng (tồn kho = 0)
+                    </span>
+
+                    <strong class="text-danger">
+                        @Model.OutOfStock
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="card shadow-sm mb-3">
+
+            <div class="card-body">
+
+                <h6 class="fw-bold text-primary mb-3">
+                    Giá trị tồn kho
+                </h6>
+
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Giá trị tồn kho cao nhất</span>
+
+                    <strong class="text-success">
+                        @Model.HighestInventoryValueText
+                    </strong>
+                </div>
+
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Giá trị tồn kho trung bình</span>
+
+                    <strong class="text-primary">
+                        @Model.AverageInventoryValueText
+                    </strong>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <span>Số lượng trung bình mỗi sản phẩm</span>
+
+                    <strong class="text-info">
+                        @Model.AverageQuantity.ToString("0.##")
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
