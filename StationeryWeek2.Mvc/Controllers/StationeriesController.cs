@@ -38,7 +38,7 @@ public class StationeriesController : Controller
         var item = _service.GetById(id);
 
         if (item == null)
-            return NotFound("Không tìm thấy văn phòng phẩm  có id = {id}");
+            return NotFound($"Không tìm thấy văn phòng phẩm  có id = {id}");
 
         var viewModel = new StationeryDetailViewModel
         {
